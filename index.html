@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>효 가족 급 해외여행 추진사이트</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #e0e0e0;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, rgba(139, 69, 219, 0.15) 0%, rgba(88, 86, 214, 0.15) 100%);
+            backdrop-filter: blur(20px);
+            padding: 50px 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(139, 69, 219, 0.3);
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            color: #c4b5fd;
+            font-size: 1.1em;
+            margin-top: 15px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .travel-info {
+            background: linear-gradient(135deg, rgba(139, 69, 219, 0.1) 0%, rgba(88, 86, 214, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 69, 219, 0.2);
+            margin-bottom: 35px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .travel-info h2 {
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(139, 69, 219, 0.3);
+        }
+        
+        .plan-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .plan-card {
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, rgba(41, 37, 88, 0.6) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 35px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #a78bfa 0%, #ec4899 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .plan-card:hover::before {
+            opacity: 1;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 0 25px 60px rgba(139, 69, 219, 0.3);
+        }
+        
+        .plan-a {
+            border-top: 3px solid #10b981;
+        }
+        
+        .plan-b {
+            border-top: 3px solid #f59e0b;
+        }
+        
+        .plan-card h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #faf5ff;
+            font-weight: 700;
+        }
+        
+        .recommended {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.5em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 1.4em;
+            font-weight: 700;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+            letter-spacing: 0.5px;
+        }
+        
+        .section {
+            margin: 25px 0;
+        }
+        
+        .section h4 {
+            color: #c4b5fd;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .flight-info, .hotel-info, .day-plan {
+            background: rgba(88, 86, 214, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #8b5cf6;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .flight-info:hover, .hotel-info:hover, .day-plan:hover {
+            background: rgba(88, 86, 214, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .day-plan {
+            border-left-color: #10b981;
+        }
+        
+        .day-title {
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        ul {
+            margin-left: 25px;
+            margin-top: 12px;
+        }
+        
+        li {
+            margin: 10px 0;
+            line-height: 1.9;
+            color: #d1d5db;
+        }
+        
+        a {
+            color: #a78bfa;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa 0%, #ec4899 100%);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        a:hover {
+            color: #ec4899;
+        }
+        
+        .review-link {
+            display: inline-block;
+            background: rgba(167, 139, 250, 0.15);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            margin-left: 8px;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .review-link:hover {
+            background: rgba(167, 139, 250, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .booking-section {
+            background: linear-gradient(135deg, rgba(139, 69, 219, 0.1) 0%, rgba(88, 86, 214, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 69, 219, 0.2);
+            margin-top: 35px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .booking-section h3 {
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+        
+        .booking-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .booking-btn {
+            display: block;
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            color: white;
+            padding: 18px 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .booking-btn:hover::before {
+            left: 100%;
+        }
+        
+        .booking-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 92, 246, 0.5);
+        }
+        
+        .tips {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 35px;
+            backdrop-filter: blur(20px);
+        }
+        
+        .tips h4 {
+            color: #fbbf24;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+        
+        .family-note {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border-left: 5px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .family-note strong {
+            color: #34d399;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, rgba(139, 69, 219, 0.1) 0%, rgba(88, 86, 214, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 69, 219, 0.2);
+            margin-top: 40px;
+            text-align: center;
+            color: #d1d5db;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        footer p:first-child {
+            font-size: 1.3em;
+            font-weight: 600;
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @media (max-width: 968px) {
+            .plan-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .booking-links {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, rgba(251, 191, 36, 0.3) 40%);
+            font-weight: 600;
+            color: #fbbf24;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+        
+        /* 스크롤 바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 27, 75, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>효 가족 급 해외여행 추진사이트</h1>
+            <div class="subtitle">📅 2025년 12월 19~21일 (2박3일) | 👨‍👩‍👧‍👦 가족 5인 여행</div>
+            <div class="subtitle">📍 출발: 경기도 의왕시 → 인천공항</div>
+        </header>
+        
+        <div class="travel-info">
+            <h2>🎯 여행 목표</h2>
+            <div class="family-note">
+                <strong>우리 가족 구성:</strong> 아빠(42세), 엄마(40세), 첫째(12세·기타), 둘째(10세·애니메이션), 막내(5세·로봇/인형)
+                <br><strong>여행 스타일:</strong> 특색있는 도시 분위기 + 아이들을 위한 추억 만들기 + 가성비 중시
+            </div>
+        </div>
+
+        <div class="plan-container">
+            <!-- 오사카 플랜 -->
+            <div class="plan-card plan-a">
+                <h3>
+                    🇯🇵 Plan A: 오사카
+                    <span class="recommended">추천!</span>
+                </h3>
+                
+                <div class="price-tag">총 예상 비용: 약 310만원</div>
+                
+                <div class="section">
+                    <h4><span class="emoji">✈️</span>항공편</h4>
+                    <div class="flight-info">
+                        <strong>제주항공 (7C1301/7C1302)</strong><br>
+                        • 가는편: 12/19(금) 09:00 출발 → 10:50 도착<br>
+                        • 오는편: 12/21(일) 20:35 출발 → 22:40 도착<br>
+                        • 비행시간: 약 1시간 50분<br>
+                        • 예상 항공료: 5인 약 150~170만원
+                        <br><br>
+                        <a href="https://www.jejuair.net" target="_blank" class="booking-btn">제주항공 예약하기 →</a>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h4><span class="emoji">🏨</span>숙소</h4>
+                    <div class="hotel-info">
+                        <strong>Hotel Hankyu Respire Osaka (우메다)</strong><br>
+                        • 위치: 우메다역 직결 (쇼핑·교통 편리)<br>
+                        • 객실: 패밀리룸 40㎡+<br>
+                        • 가격: 1박 약 28만원 × 2박 = 56만원<br>
+                        • 장점: 역 바로 앞, 대형 쇼핑몰 연결
+                        <br><br>
+                        <a href="https://www.booking.com" target="_blank" class="booking-btn">Booking.com에서 예약 →</a>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h4><span class="emoji">📋</span>일정</h4>
+                    
+                    <div class="day-plan">
+                        <div class="day-title">🌅 Day 1 (금) - 도착 & 도심 탐험</div>
+                        <ul>
+                            <li>10:50 간사이공항 도착 → 난카이전철로 난바/우메다 이동</li>
+                            <li>호텔 체크인 후 점심식사</li>
+                            <li><span class="highlight">우메다 스카이 빌딩</span> (공중정원 전망대 - 일몰 추천) 
+                                <a href="https://www.tripadvisor.co.kr/Attraction_Review-g298566-d1373822-Reviews-Umeda_Sky_Building-Osaka_Osaka_Prefecture_Kinki.html" target="_blank" class="review-link">후기 보기 →</a>
+                            </li>
+                            <li><span class="highlight">도톤보리 & 신사이바시</span> 야경 및 쇼핑 (타코야키, 오코노미야키 저녁)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="day-plan">
+                        <div class="day-title">🎢 Day 2 (토) - 아이들을 위한 하루</div>
+                        <ul>
+                            <li>오전: <span class="highlight">카이유칸 수족관</span> (일본 최대급, 고래상어 관람) 
+                                <a href="https://blog.naver.com/xsoliloquize/223567421082" target="_blank" class="review-link">후기 보기 →</a>
+                                <a href="https://www.klook.com/ko/activity/598-osaka-aquarium-kaiyukan-japan/" target="_blank" class="review-link">입장권 예약 →</a>
+                            </li>
+                            <li>점심: 덴포잔 마켓플레이스</li>
+                            <li>오후: <span class="highlight">레고랜드 디스커버리센터</span> 또는 덴포잔 대관람차 
+                                <a href="https://blog.naver.com/chooravel/223999124349" target="_blank" class="review-link">레고랜드 후기 →</a>
+                                <a href="https://www.booking.com/attractions/jp/prm6j2lavfow-legoland-discovery-center-osaka-admission.ko.html" target="_blank" class="review-link">레고랜드 예약 →</a>
+                            </li>
+                            <li>저녁: <span class="highlight">우메다 스카이 빌딩</span> 야경 및 주변 맛집</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="day-plan">
+                        <div class="day-title">🏯 Day 3 (일) - 역사 & 쇼핑</div>
+                        <ul>
+                            <li>오전: <span class="highlight">오사카성</span> & 주변 공원 산책 
+                                <a href="https://www.tripadvisor.co.kr/Attraction_Review-g298566-d321500-Reviews-Osaka_Castle-Osaka_Osaka_Prefecture_Kinki.html" target="_blank" class="review-link">후기 보기 →</a>
+                            </li>
+                            <li>점심: 오사카성 주변 식당</li>
+                            <li>오후: 신사이바시/난바에서 쇼핑 & 선물 구입</li>
+                            <li>저녁: 공항으로 이동 (20:35 출발)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h4><span class="emoji">💰</span>상세 예산</h4>
+                    <ul>
+                        <li>항공: 150~170만원</li>
+                        <li>숙박: 56만원</li>
+                        <li>교통(공항↔시내, 지하철): 20만원</li>
+                        <li>식비(1일 20만원×3일): 60만원</li>
+                        <li>입장료&액티비티: 15만원</li>
+                        <li>쇼핑&기타: 20만원</li>
+                    </ul>
+                </div>
+                
+                <div class="family-note">
+                    <strong>👨‍👩‍👧‍👦 우리 가족 맞춤 포인트:</strong><br>
+                    • 12세 딸(기타): 우메다 스카이빌딩에서 감성 사진 촬영<br>
+                    • 10세 아들(애니): 도톤보리 간판 & 오사카성에서 역사 체험<br>
+                    • 5세 막내(로봇): 레고랜드에서 신나게!<br>
+                    • 부모님: 도톤보리 야시장에서 맥주 한잔 🍺
+                </div>
+            </div>
+            
+            <!-- 타이베이 플랜 -->
+            <div class="plan-card plan-b">
+                <h3>🇹🇼 Plan B: 타이베이</h3>
+                
+                <div class="price-tag">총 예상 비용: 약 400만원</div>
+                
+                <div class="section">
+                    <h4><span class="emoji">✈️</span>항공편</h4>
+                    <div class="flight-info">
+                        <strong>제주항공 (7C2308/7C2307)</strong><br>
+                        • 가는편: 12/19(금) 13:55 출발 → 16:15 도착<br>
+                        • 오는편: 12/21(일) 17:20 출발 → 21:05 도착<br>
+                        • 비행시간: 약 2시간 30분<br>
+                        • 예상 항공료: 5인 약 190~220만원
+                        <br><br>
+                        <a href="https://www.jejuair.net" target="_blank" class="booking-btn">제주항공 예약하기 →</a>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h4><span class="emoji">🏨</span>숙소</h4>
+                    <div class="hotel-info">
+                        <strong>Taipei Garden Hotel (시먼딩)</strong><br>
+                        • 위치: 시먼딩역 도보 5분<br>
+                        • 객실: 패밀리룸<br>
+                        • 가격: 1박 약 24만원 × 2박 = 48만원<br>
+                        • 장점: 5성급, 야시장 접근성 우수
+                        <br><br>
+                        <a href="https://www.agoda.com" target="_blank" class="booking-btn">Agoda에서 예약 →</a>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h4><span class="emoji">📋</span>일정</h4>
+                    
+                    <div class="day-plan">
+                        <div class="day-title">🌆 Day 1 (금) - 도착 & 도심 탐험</div>
+                        <ul>
+                            <li>16:15 타오위안공항 도착 → MRT로 시먼딩 이동</li>
+                            <li>호텔 체크인 후 <span class="highlight">시먼딩 거리</span> 탐방</li>
+                            <li>저녁: 시먼딩 야시장에서 대만 길거리 음식 체험</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="day-plan">
+                        <div class="day-title">🎋 Day 2 (토) - 예류·스펀·지우펀 투어</div>
+                        <ul>
+                            <li>오전: <span class="highlight">예류 지질공원</span> (여왕머리바위) 
+                                <a href="https://www.kkday.com/ko/product/2830" target="_blank" class="review-link">투어 예약 →</a>
+                            </li>
+                            <li>점심: 스펀 닭날개 볶음밥</li>
+                            <li>오후: <span class="highlight">스펀 천등 날리기</span> 체험 (기찻길 위에서!) 
+                                <a href="https://blog.naver.com/choi_1114/223331946729" target="_blank" class="review-link">천등 후기 →</a>
+                                <a href="https://www.klook.com/ko/activity/91264-sky-lantern-experience/" target="_blank" class="review-link">천등 예약 →</a>
+                            </li>
+                            <li>저녁: <span class="highlight">지우펀 야경</span> 투어 (센과 치히로의 배경) 
+                                <a href="https://blog.naver.com/ally0411/223262862998" target="_blank" class="review-link">지우펀 후기 →</a>
+                            </li>
+                            <li>20:00경 타이베이 복귀</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="day-plan">
+                        <div class="day-title">🏛️ Day 3 (일) - 문화 & 맛집</div>
+                        <ul>
+                            <li>오전: <span class="highlight">국립고궁박물원</span> (세계 4대 박물관) 
+                                <a href="https://blog.naver.com/cutejun01/223668143515" target="_blank" class="review-link">박물관 후기 →</a>
+                            </li>
+                            <li>또는 <span class="highlight">타이베이 동물원</span> (판다 관람)</li>
+                            <li>점심: 융캉제 거리 <span class="highlight">딘타이펑</span> 본점</li>
+                            <li>오후: 마지막 쇼핑 & 공항 이동</li>
+                            <li>17:20 출발</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h4><span class="emoji">💰</span>상세 예산</h4>
+                    <ul>
+                        <li>항공: 190~220만원</li>
+                        <li>숙박: 48만원</li>
+                        <li>교통(공항↔시내, 투어): 35만원</li>
+                        <li>투어(예류·스펀·지우펀): 30만원</li>
+                        <li>식비(1일 18만원×3일): 54만원</li>
+                        <li>입장료&액티비티: 10만원</li>
+                        <li>쇼핑&기타: 20만원</li>
+                    </ul>
+                </div>
+                
+                <div class="family-note">
+                    <strong>👨‍👩‍👧‍👦 우리 가족 맞춤 포인트:</strong><br>
+                    • 12세 딸(기타): 지우펀 야경에서 감성 가득한 추억<br>
+                    • 10세 아들(애니): 센과 치히로 배경지에서 애니메이션 체험<br>
+                    • 5세 막내(로봇): 천등 날리기로 소원 빌기<br>
+                    • 부모님: 야시장에서 대만 맥주 🍺
+                </div>
+            </div>
+        </div>
+        
+        <div class="booking-section">
+            <h3>🔗 예약 사이트 한눈에 보기</h3>
+            <div class="booking-links">
+                <a href="https://www.jejuair.net" target="_blank" class="booking-btn">✈️ 제주항공</a>
+                <a href="https://www.twayair.com" target="_blank" class="booking-btn">✈️ 티웨이항공</a>
+                <a href="https://kr.trip.com" target="_blank" class="booking-btn">🏨 Trip.com</a>
+                <a href="https://www.booking.com" target="_blank" class="booking-btn">🏨 Booking.com</a>
+                <a href="https://www.agoda.com" target="_blank" class="booking-btn">🏨 Agoda</a>
+                <a href="https://www.kkday.com/ko" target="_blank" class="booking-btn">🎫 KKDAY</a>
+                <a href="https://www.klook.com/ko" target="_blank" class="booking-btn">🎫 Klook</a>
+                <a href="https://www.skyscanner.co.kr" target="_blank" class="booking-btn">🔍 스카이스캐너</a>
+            </div>
+        </div>
+        
+        <div class="tips">
+            <h4>💡 여행 준비 꿀팁</h4>
+            <ul>
+                <li><strong>인천공항 가는 법:</strong> 의왕시 → 4400번 리무진버스 (1시간 20분, 어른 약 15,000원)</li>
+                <li><strong>항공권:</strong> LCC는 위탁수하물 별도 구매 필요 (23kg당 3~5만원)</li>
+                <li><strong>환전:</strong> 오사카는 엔화, 타이베이는 대만달러 (공항 환전소보다 시내가 환율 좋음)</li>
+                <li><strong>날씨:</strong> 12월 오사카(5~12℃), 타이베이(15~23℃) - 패딩/두꺼운 외투 필수</li>
+                <li><strong>교통카드:</strong> 오사카(ICOCA), 타이베이(이지카드) 미리 구매 추천</li>
+                <li><strong>예약 순서:</strong> ① 항공권 → ② 숙소 → ③ 투어/입장권 순서로!</li>
+            </ul>
+        </div>
+        
+        <div class="travel-info">
+            <h2>🤔 왜 오사카가 추천일까?</h2>
+            <ul>
+                <li>✅ <strong>비행시간 짧음:</strong> 1시간 50분 vs 2시간 30분 (아이들이 덜 힘들어함)</li>
+                <li>✅ <strong>비용 저렴:</strong> 총 310만원 vs 400만원 (90만원 차이)</li>
+                <li>✅ <strong>아이 콘텐츠 풍부:</strong> 수족관, 레고랜드, 오사카성 등 체험 많음</li>
+                <li>✅ <strong>음식 다양:</strong> 타코야키, 오코노미야키, 라멘 등 아이들이 좋아하는 메뉴</li>
+                <li>✅ <strong>교통 편리:</strong> 지하철망 발달, 한국어 안내 많음</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>🎉 효 가족의 행복한 여행을 응원합니다! 🎉</p>
+            <p style="margin-top: 15px; font-size: 0.95em; opacity: 0.8;">
+                문의사항이 있으시면 언제든 연락주세요 😊<br>
+                출발 2주 전까지는 예약 완료 추천!
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
